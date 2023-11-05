@@ -2,7 +2,7 @@
   import { animate, signal, all } from '$lib/motion'
   import { formatNumber } from '$lib/utils'
 
-  let sfx = {
+  const sfx = {
     transition: 'sfx/transition.mp3',
     tally: 'sfx/tally.mp3',
   }

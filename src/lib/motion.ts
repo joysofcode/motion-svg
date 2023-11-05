@@ -4,6 +4,7 @@ import { cubicInOut } from 'svelte/easing'
 import { interpolate } from 'd3-interpolate'
 
 type AnimationFn = () => Promise<void>
+type Resolve = (value?: any) => void
 
 export function animate(fn: AnimationFn) {
   onMount(fn)
@@ -13,11 +14,11 @@ export function signal<TweenValues>(
   values: TweenValues,
   options: TweenedOptions<TweenValues> = {
     duration: 1000,
-    interpolate: interpolate,
     easing: cubicInOut,
+    interpolate,
   }
 ) {
-  const { subscribe, update } = tweened<TweenValues>(values, options)
+  const { subscribe, update, set } = tweened<TweenValues>(values, options)
 
   let tasks: AnimationFn[] = []
 
@@ -26,7 +27,11 @@ export function signal<TweenValues>(
     values: Partial<TweenValues>,
     options: TweenedOptions<TweenValues> | undefined = undefined
   ) {
-    tasks.push(() => update((prev) => ({ ...prev, ...values }), options))
+    if (typeof values === 'object') {
+      tasks.push(() => update((prev) => ({ ...prev, ...values }), options))
+    } else {
+      tasks.push(() => set(values, options))
+    }
     return this
   }
 
@@ -35,18 +40,18 @@ export function signal<TweenValues>(
     audio.volume = volume
 
     tasks.push(async () => {
-      audio.play().catch(() => console.error('To play sounds interact with the page first.'))
+      audio.play().catch(() => console.error('To play sounds interact with the page.'))
     })
 
     return this
   }
 
-  async function then(resolve: any) {
+  async function then(resolve: Resolve) {
     for (const task of tasks) {
       await task()
     }
-    resolve()
     tasks = []
+    resolve()
   }
 
   return { subscribe, to, sfx, then }

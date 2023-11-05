@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@types/d3-interpolate':
-    specifier: ^3.0.3
-    version: 3.0.3
   d3-interpolate:
     specifier: ^3.0.1
     version: 3.0.1
@@ -19,6 +16,9 @@ devDependencies:
   '@sveltejs/kit':
     specifier: ^1.20.4
     version: 1.27.1(svelte@4.2.2)(vite@4.5.0)
+  '@types/d3-interpolate':
+    specifier: ^3.0.3
+    version: 3.0.3
   svelte:
     specifier: ^4.0.5
     version: 4.2.2
@@ -382,13 +382,13 @@ packages:
 
   /@types/d3-color@3.1.2:
     resolution: {integrity: sha512-At+Ski7dL8Bs58E8g8vPcFJc8tGcaC12Z4m07+p41+DRqnZQcAlp3NfYjLrhNYv+zEyQitU1CUxXNjqUyf+c0g==}
-    dev: false
+    dev: true
 
   /@types/d3-interpolate@3.0.3:
     resolution: {integrity: sha512-6OZ2EIB4lLj+8cUY7I/Cgn9Q+hLdA4DjJHYOQDiHL0SzqS1K9DL5xIOVBSIHgF+tiuO9MU1D36qvdIvRDRPh+Q==}
     dependencies:
       '@types/d3-color': 3.1.2
-    dev: false
+    dev: true
 
   /@types/estree@1.0.3:
     resolution: {integrity: sha512-CS2rOaoQ/eAgAfcTfq6amKG7bsN+EMcgGY4FAFQdvSj2y1ixvOZTUA9mOtCai7E1SYu283XNw7urKK30nP3wkQ==}
